@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="popup.css">
+    <title>Tab Time Tracker</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="header">
+                <h1>Screen Time</h1>
+                <label class="switch">
+                    <input type="checkbox" id="darkModeSwitch" v-model="darkMode" @change="toggleDarkMode">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="graph">
+                <div v-for="tab in tabs" :key="tab.title" class="bar" :style="{ width: tab.timeSpent + 'px' }">
+                    <span>{{ tab.title }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

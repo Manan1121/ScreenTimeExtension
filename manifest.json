@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Screen Time",
+  "description": "Keeps track of screen time for various diffeent tabs and websites, similar to screen time on Apple devices",
+  "version": "1.0",
+  "icons": {
+    "16": "images/timer16.png",
+    "32": "images/timer32.png",
+    "48": "images/timer32.png",
+    "128": "images/timer128.png"
+},
+"permissions": [
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  }
+}
