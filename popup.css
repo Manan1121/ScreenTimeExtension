@@ -96,5 +96,41 @@ input:checked + .slider:before {
     margin-bottom: 5px;
     border-radius: 5px;
 }
+.button-div {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    align-items: flex-end;
+    width: 100%; /* Occupy the full width */
+}               
 
-/* ... (existing CSS styles) ... */
+button {
+    background-color: #5e5fd4;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    height: 35px;
+    width: 75px;
+    margin: 0;
+}
+
+
+button:hover{
+    background-color: rgba(109, 28, 163, 0.774);
+}
+
+ul {
+    margin-top: 20px;
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin-top: 5px;
+}
+
+a {
+    color: rebeccapurple;
+    font-size: 15px;
+}

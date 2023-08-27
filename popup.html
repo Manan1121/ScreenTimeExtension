@@ -12,18 +12,20 @@
             <div class="header">
                 <h1>Screen Time</h1>
                 <label class="switch">
-                    <input type="checkbox" id="darkModeSwitch" v-model="darkMode" @change="toggleDarkMode">
+                    <input type="checkbox" id="darkModeSwitch" >
                     <span class="slider"></span>
                 </label>
             </div>
-            <div class="graph">
-                <div v-for="tab in tabs" :key="tab.title" class="bar" :style="{ width: tab.timeSpent + 'px' }">
-                    <span>{{ tab.title }}</span>
+            <div class="graphs">
+                <ul id="ul-el"></ul>
+                </div>
+                <div id="button-div">
+                <button id="clear-btn">CLEAR</button>
+                <button id="tab-btn">GET TAB</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="popup.js"></script>
 </body>
 </html>
