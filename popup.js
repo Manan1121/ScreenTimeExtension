@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     let trackedTabs = JSON.parse(localStorage.getItem("trackedTabs")) || [];
-    let tabTimers = {};
+    let tabTimers = JSON.parse(localStorage.getItem("tabTimers")) || {};
     let activeTabId = null;
     let currentTab = {};
 
@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
     }
+
+    render(trackedTabs);
 
     //DARK MODE BUTTON START
     function toggleDarkMode() {
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
     
                 trackedTabs.push({ tabId, url: tab.url });
+                localStorage.setItem("tabTimers", JSON.stringify(tabTimers));
                 localStorage.setItem("trackedTabs", JSON.stringify(trackedTabs));
                 render(trackedTabs);
            // }
@@ -71,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             tabTimers[prevTabId].timeSpent += endTime - tabTimers[prevTabId].startTime;
             tabTimers[prevTabId].startTime = endTime;
             updateRenderedTime(prevTabId, tabTimers[prevTabId].timeSpent);
+            localStorage.setItem("tabTimers", JSON.stringify(tabTimers));
             localStorage.setItem("trackedTabs", JSON.stringify(trackedTabs));
         }
     
@@ -80,26 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-
-// chrome.tabs.onActivated.addListener(function(activeInfo) {
-//     const prevTabId = activeTabId;
-//     activeTabId = activeInfo.tabId;
-
-//     if (prevTabId && tabTimers[prevTabId]) {
-//         const endTime = Date.now();
-//         tabTimers[prevTabId].timeSpent += endTime - tabTimers[prevTabId].startTime;
-//         tabTimers[prevTabId].startTime = endTime;
-//         updateRenderedTime(prevTabId, tabTimers[prevTabId].timeSpent);
-//         localStorage.setItem("trackedTabs", JSON.stringify(trackedTabs));
-//     }
-
-//     // Start the timer for the newly activated tab
-//     if (tabTimers[activeTabId]) {
-//         tabTimers[activeTabId].startTime = Date.now();
-//     }
-// });
-
-
     // Periodically update the displayed time for tracked tabs
     setInterval(function() {
         //console.log(activeTabId)
@@ -108,11 +92,10 @@ document.addEventListener('DOMContentLoaded', function() {
             //console.log(currentTab.id)
         })
         for (const tabId in tabTimers) {
-            console.log(`${tabId}  Current Tab: ${currentTab.id}`)      
-            if (tabTimers.hasOwnProperty(tabId) && tabId === currentTab.id) {
-                console.log(`${tabId}  Current Tab: ${currentTab.id}`)
+            if (tabTimers.hasOwnProperty(tabId) && tabId == currentTab.id) {
                 const elapsedTime = Date.now() - tabTimers[tabId].startTime;
                 updateRenderedTime(tabId, tabTimers[tabId].timeSpent + elapsedTime);
+                localStorage.setItem("tabTimers", JSON.stringify(tabTimers));
             }
         }
     }, 1000); // Update every second
