@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Screen Time",
+  "name": "Screen Time Final",
   "description": "Keeps track of screen time for various diffeent tabs and websites, similar to screen time on Apple devices",
-  "version": "3.0",
+  "version": "4.0",
   "action":{
     "default_popup": "popup.html",
   "icons": {
